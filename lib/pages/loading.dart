@@ -2,8 +2,6 @@
 // ignore_for_file: use_key_in_widget_constructors
 // ignore_for_file: avoid_print
 // ignore_for_filr: await_only_futures
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:world_time_app/services/world_time.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';

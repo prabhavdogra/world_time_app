@@ -8,6 +8,7 @@ class WorldTime {
   String time = 'Loading'; // Time at that Location
   String flagUrl; // URL to the flag image asset
   String locationUrl; // Location URL for the API endpoint
+  bool isDayTime = true;
 
   WorldTime(
       {required this.location,
