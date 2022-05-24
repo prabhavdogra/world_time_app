@@ -8,7 +8,7 @@ class WorldTime {
   String time = 'Loading'; // Time at that Location
   String flagUrl; // URL to the flag image asset
   String locationUrl; // Location URL for the API endpoint
-  bool isDayTime = true;
+  bool isDayTime = false;
 
   WorldTime(
       {required this.location,
@@ -31,8 +31,8 @@ class WorldTime {
       DateTime now = DateTime.parse(datetime);
       now = now.add(Duration(
           hours: int.parse(offsetHours), minutes: int.parse(offsetMinutes)));
+      isDayTime = now.hour > 6 && now.hour < 19 ? true : false;
       time = DateFormat.jm().format(now);
-      
     } catch (e) {
       print('Error: $e');
       time = 'OOPS! Something went wrong';

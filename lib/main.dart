@@ -11,3 +11,4 @@ void main() => runApp(MaterialApp(initialRoute: '/loading', routes: {
       '/location': (context) => ChooseLocation(),
       '/loading': (context) => Loading(),
     }));
+  

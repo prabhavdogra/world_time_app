@@ -15,23 +15,58 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     // Receive the data
-    data = ModalRoute.of(context)!.settings.arguments as Map;
+    data = data.isNotEmpty
+        ? data
+        : ModalRoute.of(context)!.settings.arguments as Map;
     // Note that we don't need to use set state here
     // because we are not changing the state of the widget
 
+    // print('isDayTime = ');
+    // print(data['IsDayTime']);
+    // Set background
+    String bgImage = data['IsDayTime'] ? 'day.png' : 'night.png';
+    Color bgColor = data['IsDayTime'] ? Colors.blue : Colors.indigo;
+
     return Scaffold(
+      backgroundColor: bgColor,
       body: SafeArea(
         child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                'assets/$bgImage',
+              ),
+              fit: BoxFit.cover,
+            ),
+          ),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(0.0, 120.0, 0.0, 0.0),
             child: Column(
               children: <Widget>[
                 FlatButton.icon(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/location');
+                  onPressed: () async {
+                    dynamic result =
+                        await Navigator.pushNamed(context, '/location');
+                    setState(() {
+                      data = {
+                        'Location': result['Location'],
+                        'Flag': result['Flag'],
+                        'Time': result['Time'],
+                        'IsDayTime': result['IsDayTime'],
+                      };
+                    });
+                    print(data);
                   },
-                  icon: Icon(Icons.edit_location),
-                  label: Text('Edit Location'),
+                  icon: Icon(
+                    Icons.edit_location,
+                    color: Colors.grey[300],
+                  ),
+                  label: Text(
+                    'Edit Location',
+                    style: TextStyle(
+                      color: Colors.grey[300],
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 20.0,
@@ -44,6 +79,7 @@ class _HomeState extends State<Home> {
                       style: TextStyle(
                         fontSize: 28.0,
                         letterSpacing: 2.0,
+                        color: Colors.grey[300],
                       ),
                     )
                   ],
@@ -53,6 +89,7 @@ class _HomeState extends State<Home> {
                   data['Time'],
                   style: TextStyle(
                     fontSize: 66.0,
+                    color: Colors.grey[300],
                   ),
                 ),
               ],
