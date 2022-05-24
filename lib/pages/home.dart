@@ -55,7 +55,6 @@ class _HomeState extends State<Home> {
                         'IsDayTime': result['IsDayTime'],
                       };
                     });
-                    print(data);
                   },
                   icon: Icon(
                     Icons.edit_location,
